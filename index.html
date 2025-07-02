@@ -231,7 +231,7 @@
         // Load header and footer when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', async function() {
             // Load header first
-            await loadHTML('_header.html', 'header-placeholder');
+            await loadHTML('header.html', 'header-placeholder');
 
             // Now that the header is loaded, run its associated script logic
             const pageSelect = document.getElementById('page-select');
@@ -270,7 +270,7 @@
             initializeFoodSlider();
 
             // Finally, load the footer
-            await loadHTML('_footer.html', 'footer-placeholder');
+            await loadHTML('footer.html', 'footer-placeholder');
         });
     </script>
 </body>

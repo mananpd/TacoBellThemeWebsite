@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taco Bell</title>
+    <title>Taco Bell Parody - Home</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom CSS -->
@@ -17,7 +17,7 @@
     <!-- Main Content Area -->
     <main class="flex-grow container mx-auto p-6 bg-white rounded-lg shadow-xl my-8">
 
-        <h2 class="text-5xl font-bold text-center mb-10 text-purple-800">Welcome to the Taco Bell Experience!</h2>
+        <h2 class="text-5xl font-bold text-center mb-10 text-purple-800">Welcome to the (Un)Official Taco Bell Experience!</h2>
         <p class="text-lg text-center mb-8 max-w-3xl mx-auto">Prepare your taste buds for an adventure. Or, at least, something that vaguely resembles an adventure. Here's a glimpse into the magic (and mystery) of Taco Bell.</p>
 
         <!-- Single Video Section - Placed at the top of the main content -->
@@ -26,7 +26,7 @@
             <div class="aspect-video w-full bg-gray-300 rounded-lg flex items-center justify-center text-gray-600 text-xl font-medium shadow-sm">
                 <video autoplay loop muted class="w-full h-full object-cover rounded-lg" src="Images/Taco Bell Commercial 2021 - (USA).mp4" onerror="this.onerror=null;this.src='https://placehold.co/1280x720/000000/FFFFFF?text=Video+Not+Found';"></video>
             </div>
-            <p class="text-gray-700 mt-4 text-center">Witness the raw, untamed joy that only a visit to Taco Bell can bring.</p>
+            <p class="text-gray-700 mt-4 text-center">Witness the raw, untamed joy that only a visit to Taco Bell can bring. (Actual video not included due to budget constraints and lack of acting talent).</p>
         </div>
 
         <p id="head" class="text-5xl font-bold text-center mb-10 text-purple-800 mt-12">THE LINE UP</p>
@@ -38,33 +38,35 @@
                 <a href="everyday-value.html" class="food-slide">
                     <button class="buttondesign">
                         <div class="photo-container">
-                            <img class="photo" src="Images/crunchwrap.jpg">
+                            <!-- First image loads immediately -->
+                            <img class="photo" src="Images/crunchwrap.jpg" alt="Every Day Best Value" width="288" height="288" loading="eager">
                         </div>
-                        <p class="productname">Signature Items</p>
+                        <p class="productname">EVERY DAY BEST VALUE</p>
                     </button>
                 </a>
                 <a href="crave-save.html" class="food-slide">
                     <button class="buttondesign">
                         <div class="photo-container">
-                            <img class="photo" src="Images/burrito.jpg">
+                            <!-- Subsequent images use data-src for lazy loading -->
+                            <img class="photo" src="Images/crunchwrap.jpg" alt="Crave & Save" width="288" height="288" loading="lazy">
                         </div>
-                        <p class="productname">Burritos</p>
+                        <p class="productname">CRAVE & SAVE</p>
                     </button>
                 </a>
                 <a href="combo.html" class="food-slide">
                     <button class="buttondesign">
                         <div class="photo-container">
-                            <img class="photo" src="Images/burrito.jpg">
+                            <img class="photo" src="Images/crunchwrap.jpg" alt="Crave & Save" width="288" height="288" loading="lazy">
                         </div>
-                        <p class="productname">Tacos</p>
+                        <p class="productname">BIG SAVING COMBOS</p>
                     </button>
                 </a>
                 <a href="papad-chalupa.html" class="food-slide">
                     <button class="buttondesign">
                         <div class="photo-container">
-                            <img class="photo" src="Images/burrito.jpg">
+                            <img class="photo" src="Images/crunchwrap.jpg" alt="Crave & Save" width="288" height="288" loading="lazy">
                         </div>
-                        <p class="productname">Speciality Items</p>
+                        <p class="productname">PAPAD & CHALUPA</p>
                     </button>
                 </a>
             </div>
@@ -104,6 +106,40 @@
         let currentFoodSlide = 0;
         let foodSlideInterval;
 
+        // Function to load a specific image
+        function loadImage(slideElement) {
+            const img = slideElement.querySelector('.photo');
+            if (!img) return; // Exit if no image found
+
+            // If image has data-src and hasn't been loaded yet
+            if (img.dataset.src && img.src !== img.dataset.src) {
+                img.src = img.dataset.src; // Load from data-src
+                img.onload = () => {
+                    slideElement.classList.add('image-loaded');
+                };
+                img.onerror = () => {
+                    console.error('Failed to load image:', img.dataset.src);
+                    img.src = 'https://placehold.co/288x288/CCCCCC/333333?text=Error';
+                };
+            } else if (!img.dataset.src) {
+                // This branch handles images that have their src directly set (like the first one)
+                // Ensure the 'image-loaded' class is applied if it's already loaded
+                if (img.complete && img.naturalHeight !== 0) {
+                    slideElement.classList.add('image-loaded');
+                } else {
+                    // If not yet complete, wait for it to load
+                    img.onload = () => {
+                        slideElement.classList.add('image-loaded');
+                    };
+                    img.onerror = () => {
+                        console.error('Failed to load eager image:', img.src);
+                        img.src = 'https://placehold.co/288x288/CCCCCC/333333?text=Error';
+                    };
+                }
+            }
+        }
+
+
         function initializeFoodSlider() {
             foodSlides = document.querySelectorAll('.food-slide');
             foodNavBtns = document.querySelectorAll('.food-nav-btn');
@@ -115,17 +151,29 @@
 
             // Only initialize slider behavior if on a mobile viewport
             if (window.innerWidth < 768) { // md breakpoint is 768px
-                // Ensure only the active slide is visible on mobile
+                // Ensure only the active slide is visible on mobile and load its image
                 foodSlides.forEach((slide, index) => {
                     slide.style.display = (index === currentFoodSlide) ? 'flex' : 'none';
+                    // For the initial active slide, ensure 'image-loaded' class is applied immediately
+                    if (index === currentFoodSlide) {
+                        loadImage(slide); // Call loadImage to handle src and onload/onerror
+                        // Also, explicitly add 'image-loaded' class if the image is already complete
+                        const img = slide.querySelector('.photo');
+                        if (img && img.complete && img.naturalHeight !== 0) {
+                            slide.classList.add('image-loaded');
+                        }
+                    }
                 });
                 foodNavBtns.forEach((btn, index) => {
                     btn.classList.toggle('active', index === currentFoodSlide);
                 });
                 startFoodSlider(); // Start auto-play
             } else {
-                // On desktop, ensure all slides are visible and no interval runs
-                foodSlides.forEach(slide => slide.style.display = 'flex'); // Ensure all are visible
+                // On desktop, ensure all slides are visible and load all their images
+                foodSlides.forEach(slide => {
+                    slide.style.display = 'flex'; // Ensure all are visible
+                    loadImage(slide); // Load image for each desktop slide
+                });
                 if (foodSlideInterval) {
                     clearInterval(foodSlideInterval);
                 }
@@ -145,6 +193,7 @@
                 foodSlides[index].classList.add('active');
                 foodSlides[index].style.display = 'flex'; // Explicitly show active
                 foodNavBtns[index].classList.add('active');
+                loadImage(foodSlides[index]); // Load image for the newly active slide
             }
         }
 

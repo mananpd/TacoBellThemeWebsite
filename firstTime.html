@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taco Bell Parody - First Time Visit</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-purple-700 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <h1 class="text-4xl font-extrabold mb-4 md:mb-0 transform hover:scale-105 transition-transform duration-300">
+                Taco Bell (Not)
+            </h1>
+            <!-- Dropdown Navigation -->
+            <nav>
+                <label for="page-select" class="sr-only">Choose a page:</label>
+                <select id="page-select" class="bg-purple-800 text-white p-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 cursor-pointer transition-all duration-300 hover:bg-purple-600" onchange="window.location.href=this.value+'.html'">
+                    <option value="index">Home (Pics & Videos)</option>
+                    <option value="first-time-visit" selected>First Time Visit</option>
+                    <option value="what-to-expect">What to Expect</option>
+                    <option value="food">Our "Food"</option>
+                    <option value="about">About Us (Not Really)</option>
+                </select>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow container mx-auto p-6 bg-white rounded-lg shadow-xl my-8">
+
+        <!-- First Time Visit Section -->
+        <section id="first-time-visit-page" class="page-section active">
+            <h2 class="text-5xl font-bold text-center mb-10 text-purple-800">Your First Voyage into the Bell-verse</h2>
+            <p class="text-lg text-center mb-8 max-w-3xl mx-auto">So, you're a virgin to the Taco Bell experience? Bless your heart. Here's a brief, highly inaccurate guide to what to expect.</p>
+
+            <div class="space-y-8">
+                <div class="bg-yellow-50 p-6 rounded-xl shadow-md border-l-4 border-yellow-400">
+                    <h3 class="text-3xl font-semibold mb-4 text-yellow-700">Step 1: The Decision</h3>
+                    <p class="text-gray-700">You've thought about it. You've dreamt about it. Maybe you've even been dared. The moment of truth has arrived. Will it be a Crunchwrap Supreme or a dozen Doritos Locos Tacos? The choice is yours, but the consequences are universal.</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl shadow-md border-l-4 border-green-400">
+                    <h3 class="text-3xl font-semibold mb-4 text-green-700">Step 2: The Order</h3>
+                    <p class="text-gray-700">Approach the counter with confidence, even if your stomach is doing interpretive dance. Speak clearly. The staff are highly trained in deciphering mumbled cravings. Don't forget your sauce packets – they are the lifeblood of this establishment.</p>
+                </div>
+                <div class="bg-red-50 p-6 rounded-xl shadow-md border-l-4 border-red-400">
+                    <h3 class="text-3xl font-semibold mb-4 text-red-700">Step 3: The Consumption</h3>
+                    <p class="text-gray-700">This is where the magic happens. Or the mess. Probably both. Embrace the chaos. Don't ask what's in the "meat." Just enjoy the symphony of textures and the vague sensation of Mexican-inspired flavors. Hydration is key afterwards.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-purple-700 text-white p-4 text-center mt-8 shadow-inner">
+        <div class="container mx-auto">
+            <p>&copy; 2025 Taco Bell (Not). All rights reserved. Or not. We're not lawyers. Please don't sue us.</p>
+            <p class="text-sm mt-2">Disclaimer: This website is a parody and has no affiliation with the actual Taco Bell Corporation. Any resemblance to real food or events is purely coincidental (or intentional, for comedic effect).</p>
+        </div>
+    </footer>
+</body>
+</html>

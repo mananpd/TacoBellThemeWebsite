@@ -1,0 +1,217 @@
+/* Custom styles for the Inter font and general body styling */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f7fafc; /* Light gray background */
+    color: #2d3748; /* Dark gray text */
+}
+
+/* Hide sections by default, though with separate files, this is less critical */
+.page-section {
+    display: block; /* All sections are visible on their respective pages */
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    cursor: pointer;
+}
+
+/* Single Video Wrapper Styles */
+.single-video-wrapper {
+    /* Tailwind classes are directly in HTML for this now, but keeping this for reference */
+    /* bg-gray-100 p-6 rounded-xl shadow-md mt-12 transform hover:scale-102 transition-transform duration-300 */
+}
+
+/* Food Slider Wrapper - Acts as the main container for the slider on mobile, and grid on desktop */
+.food-slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin-top: 2rem; /* Space from the "THE LINE UP" heading */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    background-color: #f8fafc; /* Light background for the container */
+    padding: 1rem; /* Add some padding inside the wrapper */
+
+    /* Default (Mobile First): Flex for slider */
+    display: flex;
+    flex-direction: column; /* Stack slides and navigation vertically */
+    align-items: center; /* Center content horizontally */
+    overflow: hidden; /* Hide overflowing slides */
+    min-height: 28rem; /* Adjusted minimum height for single item + nav with square images */
+}
+
+/* Food Items Container - Holds the actual slides */
+.food-items-container {
+    display: flex; /* Always flex inside the wrapper */
+    width: 100%; /* Take full width of parent */
+    justify-content: center; /* Center the current slide */
+    align-items: center; /* Center vertically */
+    flex-grow: 1; /* Allow it to take available space */
+}
+
+/* Food Slide (each individual food item link) */
+.food-slide {
+    flex-shrink: 0; /* Prevent items from shrinking */
+    width: 100%; /* Each slide takes full width of the container on mobile */
+    display: none; /* Hidden by default on mobile, JS/active class will show */
+    justify-content: center; /* Center content within the slide */
+    align-items: center; /* Center content vertically */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.food-slide.active {
+    display: flex; /* Show active slide on mobile */
+    opacity: 1;
+}
+
+/* Food Slider Navigation Buttons (visible only on mobile) */
+.food-slider-navigation {
+    display: flex; /* Hidden by default on desktop, flex on mobile */
+    justify-content: center;
+    gap: 0.75rem; /* space-x-3 */
+    margin-top: 1.5rem; /* Adjusted space above buttons */
+    padding-bottom: 0.5rem; /* Padding below buttons */
+    z-index: 10; /* Ensure nav buttons are on top */
+}
+
+.food-nav-btn {
+    width: 0.75rem; /* w-3 */
+    height: 0.75rem; /* h-3 */
+    border-radius: 9999px; /* rounded-full */
+    background-color: rgba(139, 92, 246, 0.4); /* Purple with transparency */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    border: 1px solid rgba(139, 92, 246, 0.7); /* Subtle border */
+}
+
+.food-nav-btn:hover {
+    background-color: rgba(139, 92, 246, 0.7); /* Darker purple on hover */
+    transform: scale(1.1);
+}
+
+.food-nav-btn.active {
+    background-color: #8B5CF6; /* Solid purple for active */
+    transform: scale(1.2);
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5); /* Ring for active */
+}
+
+/* Food Item Button Styles (common for both desktop and mobile) */
+.buttondesign {
+    background-color: #fff;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    padding: 1rem; /* p-4 */
+    width: 18rem; /* Fixed width for desktop grid items */
+    height: 24rem; /* Adjusted height to accommodate square image and text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 2px solid #e2e8f0; /* border border-gray-200 */
+    cursor: pointer;
+}
+
+.buttondesign:hover {
+    transform: scale(1.05); /* hover:scale-105 */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Larger shadow on hover */
+}
+
+.photo-container {
+    width: 100%;
+    /* Enforce square dimensions using aspect-ratio */
+    aspect-ratio: 1 / 1;
+    height: auto; /* Allow height to be determined by aspect-ratio */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.375rem; /* rounded-md */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the square area */
+}
+
+.productname {
+    font-weight: 600; /* font-semibold */
+    color: #2d3748; /* text-gray-800 */
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.2; /* Adjust line height for better fit */
+}
+
+.empty {
+    display: none; /* Hide empty buttons as they are not needed with this layout */
+}
+
+/* Desktop Styles (md breakpoint and up) */
+@media (min-width: 768px) { /* md breakpoint */
+    .food-slider-wrapper {
+        display: grid; /* Change to grid for desktop */
+        grid-template-columns: repeat(4, 1fr); /* Exactly 4 columns */
+        gap: 1.5rem; /* Gap between items */
+        overflow: visible; /* Disable overflow on desktop */
+        min-height: unset; /* Remove min-height for grid layout */
+        padding: 1rem; /* Keep padding */
+    }
+
+    .food-items-container {
+        display: contents; /* Makes children participate directly in grid layout */
+    }
+
+    .food-slide {
+        display: flex; /* Ensure all desktop items are visible */
+        opacity: 1; /* Ensure all desktop items are fully visible */
+        width: auto; /* Allow grid to manage width */
+        height: auto; /* Allow content to define height */
+        justify-content: center; /* Center item within its grid cell */
+        align-items: center; /* Center item vertically within its grid cell */
+    }
+
+    .food-slider-navigation {
+        display: none; /* Hide navigation buttons on desktop */
+    }
+
+    .buttondesign {
+        width: 100%; /* Take full width of grid cell */
+        max-width: 18rem; /* Max width for consistency */
+        height: 24rem; /* Maintain desktop height for square image */
+    }
+}
+
+/* Mobile Styles (max-width: 767px) */
+@media (max-width: 767px) { /* For screens smaller than md */
+    .buttondesign {
+        width: calc(100% - 2rem); /* Make each item take full width minus padding */
+        height: 18rem; /* Adjusted height for mobile viewing with square image */
+        padding: 0.75rem; /* Slightly less padding on mobile */
+    }
+    .photo-container {
+        /* On mobile, photo-container already takes 100% width, aspect-ratio will make it square */
+        /* No specific height needed here, as aspect-ratio handles it */
+    }
+    .productname {
+        font-size: 0.9rem; /* Smaller font on mobile */
+    }
+    .food-slider-wrapper {
+        padding: 0.5rem; /* Adjust padding for mobile wrapper */
+        min-height: 25rem; /* Adjusted min-height for mobile with square images */
+    }
+}

@@ -1,0 +1,39 @@
+<!-- header.html -->
+<header class="bg-purple-700 text-white p-4 shadow-lg">
+    <!-- Changed flex-col to flex-row for all screen sizes to enable side-by-side layout -->
+    <div class="container mx-auto flex flex-row items-center justify-between">
+        <!-- Left Desktop Navigation (Visible on medium screens and up) -->
+        <div class="hidden md:flex items-center space-x-6 text-lg font-semibold">
+            <a href="index.html" class="hover:text-purple-200 transition-colors duration-200 desktop-nav-link" data-page="index">Home</a>
+            <a href="first-time-visit.html" class="hover:text-purple-200 transition-colors duration-200 desktop-nav-link" data-page="first-time-visit">First Time Visit</a>
+        </div>
+
+        <!-- Taco Bell (Not) Title as an Image, linking to index.html -->
+        <!-- Removed mb-4 to prevent vertical stacking margin on mobile -->
+        <a href="index.html" class="block transform hover:scale-105 transition-transform duration-300">
+            <img src="Images/pixelcut-export.png" alt="Taco Bell (Not) Logo" class="h-25 md:h-40 w-auto rounded-md shadow-md">
+        </a>
+
+        <!-- Right Desktop Navigation & Mobile Dropdown Container -->
+        <nav class="flex items-center space-x-2">
+            <!-- Right Desktop Navigation (Visible on medium screens and up) -->
+            <div class="hidden md:flex items-center space-x-6 text-lg font-semibold">
+                <a href="what-to-expect.html" class="hover:text-purple-200 transition-colors duration-200 desktop-nav-link" data-page="what-to-expect">What to Expect</a>
+                <a href="food.html" class="hover:text-purple-200 transition-colors duration-200 desktop-nav-link" data-page="food">Food</a>
+                <a href="about.html" class="hover:text-purple-200 transition-colors duration-200 desktop-nav-link" data-page="about">About</a>
+            </div>
+
+            <!-- Mobile Dropdown Navigation (Visible on small screens only) -->
+            <div class="md:hidden flex items-center space-x-2">
+                <label for="page-select" class="sr-only">Navigate To:</label>
+                <select id="page-select" class="bg-purple-800 text-white p-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 cursor-pointer transition-all duration-300 hover:bg-purple-600">
+                    <option value="index">Home (Pics & Videos)</option>
+                    <option value="first-time-visit">First Time Visit</option>
+                    <option value="what-to-expect">What to Expect</option>
+                    <option value="food">Our "Food"</option>
+                    <option value="about">About Us (Not Really)</option>
+                </select>
+            </div>
+        </nav>
+    </div>
+</header>

@@ -67,13 +67,12 @@ body {
     display: none; /* Hidden by default on mobile, JS/active class will show */
     justify-content: center; /* Center content within the slide */
     align-items: center; /* Center content vertically */
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    /* Removed opacity and transition here as display: none prevents animation */
 }
 
 .food-slide.active {
     display: flex; /* Show active slide on mobile */
-    opacity: 1;
+    opacity: 1; /* Keep opacity for consistency, though display change is instant */
 }
 
 /* Food Slider Navigation Buttons (visible only on mobile) */
@@ -207,7 +206,7 @@ body {
 @media (max-width: 767px) { /* For screens smaller than md */
     .buttondesign {
         width: calc(100% - 2rem); /* Make each item take full width minus padding */
-        height: 18rem; /* Adjusted height for mobile viewing with square image */
+        height: 22rem; /* Adjusted height for mobile viewing with square image */
         padding: 0.75rem; /* Slightly less padding on mobile */
     }
     .photo-container {

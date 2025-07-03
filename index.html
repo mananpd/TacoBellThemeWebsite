@@ -17,16 +17,17 @@
     <!-- Main Content Area -->
     <main class="flex-grow container mx-auto p-6 bg-white rounded-lg shadow-xl my-8">
 
-        <h2 class="text-5xl font-bold text-center mb-10 text-purple-800">Welcome to our Official Taco Bell Experience!</h2>
+        <h2 class="text-5xl font-bold text-center mb-10 text-purple-800">Welcome to the Our Taco Bell Experience!</h2>
         <p class="text-lg text-center mb-8 max-w-3xl mx-auto">Prepare your taste buds for an adventure. Or, at least, something that vaguely resembles an adventure. Here's a glimpse into the magic (and mystery) of Taco Bell.</p>
 
         <!-- Single Video Section - Placed at the top of the main content -->
         <div class="single-video-wrapper bg-gray-100 p-6 rounded-xl shadow-md mt-12 transform hover:scale-102 transition-transform duration-300">
-            <h3 class="text-3xl font-semibold mb-4 text-purple-700 text-center">A Glimpse of the Bell Life</h3>
+            <h3 class="text-3xl font-semibold mb-4 text-purple-700 text-center">A Glimpse of the Bell Life (Featured Video)</h3>
             <div class="aspect-video w-full bg-gray-300 rounded-lg flex items-center justify-center text-gray-600 text-xl font-medium shadow-sm">
-                <video autoplay loop muted class="w-full h-full object-cover rounded-lg" src="Images/Commercial.mp4" onerror="this.onerror=null;this.src='https://placehold.co/1280x720/000000/FFFFFF?text=Video+Not+Found';"></video>
+                <!-- Added 'autoplay' back. 'muted' and 'playsinline' are key for inline autoplay on mobile. -->
+                <video autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg" src="Images/Commercial_compressed.mp4" onerror="this.onerror=null;this.src='https://placehold.co/1280x720/000000/FFFFFF?text=Video+Not+Found';"></video>
             </div>
-            <p class="text-gray-700 mt-4 text-center">Witness the raw, untamed joy that only a visit to Taco Bell can bring.</p>
+            <p class="text-gray-700 mt-4 text-center">Witness the raw, untamed joy that only a visit to Taco Bell can bring. (Actual video not included due to budget constraints and lack of acting talent).</p>
         </div>
 
         <p id="head" class="text-5xl font-bold text-center mb-10 text-purple-800 mt-12">THE LINE UP</p>
@@ -39,32 +40,32 @@
                     <button class="buttondesign">
                         <div class="photo-container">
                             <!-- First image loads immediately -->
-                            <img class="photo" src="Images/crunchwrap.jpg" alt="Speciality" width="288" height="288" loading="eager">
+                            <img class="photo" src="Images/crunchwrap.jpg" alt="Signature Meals" width="288" height="288" loading="eager">
                         </div>
-                        <p class="productname">Signature Classics</p>
+                        <p class="productname">Signature Meals</p>
                     </button>
                 </a>
                 <a href="crave-save.html" class="food-slide">
                     <button class="buttondesign">
                         <div class="photo-container">
                             <!-- Subsequent images use data-src for lazy loading -->
-                            <img class="photo" src="Images/burrito.jpg" alt="Burrito" width="288" height="288" loading="lazy">
+                            <img class="photo" data-src="Images/burrito.jpg" alt="Burritos & Wraps" width="288" height="288" loading="lazy">
                         </div>
-                        <p class="productname">Burritos and Wraps</p>
+                        <p class="productname">Burritos & Wraps</p>
                     </button>
                 </a>
                 <a href="combo.html" class="food-slide">
                     <button class="buttondesign">
                         <div class="photo-container">
-                            <img class="photo" src="Images/Taco.jpg" alt="Taco" width="288" height="288" loading="lazy">
+                            <img class="photo" data-src="Images/Taco.jpg" alt="Tacos & More" width="288" height="288" loading="lazy">
                         </div>
-                        <p class="productname">Tacos and More</p>
+                        <p class="productname">Tacos & More</p>
                     </button>
                 </a>
                 <a href="papad-chalupa.html" class="food-slide">
                     <button class="buttondesign">
                         <div class="photo-container">
-                            <img class="photo" src="Images/Ques.jpg" alt="Other" width="288" height="288" loading="lazy">
+                            <img class="photo" data-src="Images/Ques.jpg" alt="Speciality Items" width="288" height="288" loading="lazy">
                         </div>
                         <p class="productname">Speciality Items</p>
                     </button>
@@ -85,193 +86,8 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
-    <script>
-        // Function to load HTML content into a placeholder
-        async function loadHTML(url, elementId) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error(`Could not load ${url}:`, error);
-            }
-        }
+    <!-- Link to your external JavaScript file -->
+    <script src="js/app.js"></script>
 
-        // Script for the Food Items Slider functionality (mobile only)
-        let foodSlides;
-        let foodNavBtns;
-        let currentFoodSlide = 0;
-        let foodSlideInterval;
-
-        // Function to load a specific image
-        function loadImage(slideElement) {
-            const img = slideElement.querySelector('.photo');
-            if (!img) return; // Exit if no image found
-
-            // If image has data-src and hasn't been loaded yet
-            if (img.dataset.src && img.src !== img.dataset.src) {
-                img.src = img.dataset.src; // Load from data-src
-                img.onload = () => {
-                    slideElement.classList.add('image-loaded');
-                };
-                img.onerror = () => {
-                    console.error('Failed to load image:', img.dataset.src);
-                    img.src = 'https://placehold.co/288x288/CCCCCC/333333?text=Error';
-                };
-            } else if (!img.dataset.src) {
-                // This branch handles images that have their src directly set (like the first one)
-                // Ensure the 'image-loaded' class is applied if it's already loaded
-                if (img.complete && img.naturalHeight !== 0) {
-                    slideElement.classList.add('image-loaded');
-                } else {
-                    // If not yet complete, wait for it to load
-                    img.onload = () => {
-                        slideElement.classList.add('image-loaded');
-                    };
-                    img.onerror = () => {
-                        console.error('Failed to load eager image:', img.src);
-                        img.src = 'https://placehold.co/288x288/CCCCCC/333333?text=Error';
-                    };
-                }
-            }
-        }
-
-
-        function initializeFoodSlider() {
-            foodSlides = document.querySelectorAll('.food-slide');
-            foodNavBtns = document.querySelectorAll('.food-nav-btn');
-
-            if (foodSlides.length === 0) {
-                console.warn("Food slider elements not found. Skipping slider initialization.");
-                return;
-            }
-
-            // Only initialize slider behavior if on a mobile viewport
-            if (window.innerWidth < 768) { // md breakpoint is 768px
-                // Ensure only the active slide is visible on mobile and load its image
-                foodSlides.forEach((slide, index) => {
-                    slide.style.display = (index === currentFoodSlide) ? 'flex' : 'none';
-                    // For the initial active slide, ensure 'image-loaded' class is applied immediately
-                    if (index === currentFoodSlide) {
-                        loadImage(slide); // Call loadImage to handle src and onload/onerror
-                        // Also, explicitly add 'image-loaded' class if the image is already complete
-                        const img = slide.querySelector('.photo');
-                        if (img && img.complete && img.naturalHeight !== 0) {
-                            slide.classList.add('image-loaded');
-                        }
-                    }
-                });
-                foodNavBtns.forEach((btn, index) => {
-                    btn.classList.toggle('active', index === currentFoodSlide);
-                });
-                startFoodSlider(); // Start auto-play
-            } else {
-                // On desktop, ensure all slides are visible and load all their images
-                foodSlides.forEach(slide => {
-                    slide.style.display = 'flex'; // Ensure all are visible
-                    loadImage(slide); // Load image for each desktop slide
-                });
-                if (foodSlideInterval) {
-                    clearInterval(foodSlideInterval);
-                }
-            }
-        }
-
-
-        function playFoodSlide(index) {
-            // Only apply slide logic if on mobile
-            if (window.innerWidth < 768) {
-                foodSlides.forEach((slide, i) => {
-                    slide.classList.remove('active');
-                    slide.style.display = 'none'; // Explicitly hide non-active
-                });
-                foodNavBtns.forEach(btn => btn.classList.remove('active'));
-
-                foodSlides[index].classList.add('active');
-                foodSlides[index].style.display = 'flex'; // Explicitly show active
-                foodNavBtns[index].classList.add('active');
-                loadImage(foodSlides[index]); // Load image for the newly active slide
-            }
-        }
-
-        function nextFoodSlide() {
-            currentFoodSlide = (currentFoodSlide + 1) % foodSlides.length;
-            playFoodSlide(currentFoodSlide);
-        }
-
-        function startFoodSlider() {
-            if (foodSlideInterval) {
-                clearInterval(foodSlideInterval);
-            }
-            foodSlideInterval = setInterval(nextFoodSlide, 5000); // Change slide every 5 seconds
-        }
-
-        // Event listeners for food slider navigation buttons
-        // Attach after elements are loaded
-        document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('food-nav-btn')) {
-                const index = Array.from(foodNavBtns).indexOf(event.target);
-                if (index !== -1) {
-                    currentFoodSlide = index;
-                    playFoodSlide(currentFoodSlide);
-                    startFoodSlider(); // Restart interval on manual navigation
-                }
-            }
-        });
-
-        // Re-initialize slider on window resize to switch between desktop/mobile behavior
-        window.addEventListener('resize', () => {
-            initializeFoodSlider();
-        });
-
-
-        // Load header and footer when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', async function() {
-            // Load header first
-            await loadHTML('header.html', 'header-placeholder');
-
-            // Now that the header is loaded, run its associated script logic
-            const pageSelect = document.getElementById('page-select');
-            const desktopLinks = document.querySelectorAll('.desktop-nav-link');
-
-            // Get the current page filename (e.g., "index", "first-time-visit")
-            const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
-
-            // --- Handle Mobile Dropdown ---
-            if (pageSelect) {
-                // Set the selected option in the dropdown for mobile
-                if (currentPage) {
-                    pageSelect.value = currentPage;
-                }
-                // Add the event listener for mobile navigation
-                pageSelect.addEventListener('change', function() {
-                    window.location.href = this.value + '.html';
-                });
-            }
-
-            // --- Handle Desktop Links ---
-            desktopLinks.forEach(link => {
-                // Check if the link's data-page attribute matches the current page
-                if (link.getAttribute('data-page') === currentPage) {
-                    link.classList.add('font-bold', 'text-purple-100', 'underline', 'underline-offset-4'); // Highlight active link
-                }
-                // Add click listener for desktop links (though href handles it, this is for consistency)
-                link.addEventListener('click', function(event) {
-                    // Prevent default if you want to add more logic, otherwise href works directly
-                    // event.preventDefault();
-                    // window.location.href = this.href;
-                });
-            });
-
-            // Initialize the food slider after header and content are loaded
-            initializeFoodSlider();
-
-            // Finally, load the footer
-            await loadHTML('footer.html', 'footer-placeholder');
-        });
-    </script>
 </body>
 </html>

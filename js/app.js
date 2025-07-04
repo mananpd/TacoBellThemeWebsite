@@ -1,5 +1,7 @@
 // js/app.js
 
+// js/app.js
+
 // Function to load HTML content into a placeholder
 async function loadHTML(url, elementId) {
     try {
@@ -158,39 +160,42 @@ window.addEventListener('resize', () => {
 // Load header and footer when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', async function() {
     // Load header first
+    // Assuming 'header-placeholder' is where header.html is loaded
     await loadHTML('header.html', 'header-placeholder');
 
-    // Now that the header is loaded, run its associated script logic
+    // --- Header & Navigation Logic (AFTER header is loaded) ---
     const pageSelect = document.getElementById('page-select');
     const desktopLinks = document.querySelectorAll('.desktop-nav-link');
 
-    // Get the current page filename (e.g., "index", "first-time-visit")
-    const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
+    // Get the current page filename (e.g., "index.html", "firstTime.html")
+    const currentPath = window.location.pathname.split('/').pop();
 
     // --- Handle Mobile Dropdown ---
-    if (pageSelect) {
+    if (pageSelect) { // Ensure the select element exists
         // Set the selected option in the dropdown for mobile
-        if (currentPage) {
-            pageSelect.value = currentPage;
+        // Loop through options to find a match for the current page
+        for (let i = 0; i < pageSelect.options.length; i++) {
+            if (pageSelect.options[i].value === currentPath) {
+                pageSelect.value = currentPath;
+                break; // Exit loop once found
+            }
         }
+
         // Add the event listener for mobile navigation
         pageSelect.addEventListener('change', function() {
-            window.location.href = this.value + '.html';
+            window.location.href = this.value; // Use this.value directly, it already has '.html'
         });
     }
 
-    // --- Handle Desktop Links ---
+    // --- Handle Desktop Links for highlighting active page ---
     desktopLinks.forEach(link => {
-        // Check if the link's data-page attribute matches the current page
-        if (link.getAttribute('data-page') === currentPage) {
+        // Check if the link's href matches the current page path
+        // Use link.getAttribute('href') to get the exact value including .html
+        if (link.getAttribute('href') === currentPath) {
             link.classList.add('font-bold', 'text-purple-100', 'underline', 'underline-offset-4'); // Highlight active link
         }
-        // Add click listener for desktop links (though href handles it, this is for consistency)
-        link.addEventListener('click', function(event) {
-            // Prevent default if you want to add more logic, otherwise href works directly
-            // event.preventDefault();
-            // window.location.href = this.href;
-        });
+        // No need for a click listener here unless you want to prevent default
+        // The href attribute handles navigation directly.
     });
 
     // Initialize the food slider after header and content are loaded
@@ -199,5 +204,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     initializeFoodSlider();
 
     // Finally, load the footer
+    // Assuming 'footer-placeholder' is where footer.html is loaded
     await loadHTML('footer.html', 'footer-placeholder');
 });

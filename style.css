@@ -163,6 +163,36 @@ body {
     line-height: 1.2; /* Adjust line height for better fit */
 }
 
+/* Custom styles for the new FAQ look */
+.faq-item-new {
+    background-color: #ffffff; /* White background for each item */
+    padding: 1.5rem; /* p-6 */
+    border-radius: 0.75rem; /* rounded-lg */
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.03); /* subtle shadow */
+    margin-bottom: 1.5rem; /* Space between items */
+    border-left: 6px solid #8B5CF6; /* Prominent purple left border */
+    transition: all 0.2s ease-in-out; /* Smooth transition for hover */
+}
+
+.faq-item-new:hover {
+    transform: translateX(5px); /* Slide slightly right on hover */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.faq-question-new {
+    color: #4A0082; /* Darker purple for questions */
+    font-size: 1.625rem; /* Larger font for questions */
+    font-weight: 700; /* Extra bold for questions */
+    margin-bottom: 0.75rem; /* More space below question */
+    line-height: 1.3;
+}
+
+.faq-answer-new {
+    color: #4B5563; /* Gray-700 for answers */
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.7; /* Slightly more relaxed line height */
+}
+
 .empty {
     display: none; /* Hide empty buttons as they are not needed with this layout */
 }

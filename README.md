@@ -12,4 +12,4 @@ Some ideas and structural concepts for this project were inspired by and adapted
 
     [PapadBell](https://github.com/Roots26Hz/PapadBell/tree/main)
 
-These ideas were utilized in accordance with the GNU General Public License Version 3
+These ideas were utilized in accordance with the GNU General Public License Version 3.

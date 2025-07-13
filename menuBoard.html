@@ -3,99 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simplified Parody Taco Bell Menu</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Widescreen No-Scroll Taco Bell Menu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom styles for the menu board */
+        /* Base styles for the menu board */
         body {
-            font-family: 'Inter', sans-serif; /* Using Inter for a clean look */
-            background-color: #1a001a; /* Static dark purple background */
-            color: #ffffff; /* White text for contrast */
-            overflow: hidden; /* Hide scrollbars */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Ensure it takes full viewport height */
+            font-family: 'Inter', sans-serif;
+            background-color: #1a001a; /* Dark purple background */
+            color: #ffffff;
             margin: 0;
-        }
-
-        .menu-container {
-            position: relative; /* For absolute positioning of slides */
-            width: 100vw; /* Take full viewport width */
-            height: 100vh; /* Take full viewport height */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
+            padding: 0.4vmin; /* Further reduced padding around the entire content */
             box-sizing: border-box;
+            height: 100vh; /* Ensure full viewport height */
+            width: 100vw; /* Ensure full viewport width */
+            display: grid; /* Use grid for main layout */
+            grid-template-rows: auto 1fr; /* Header, Main Content Area */
+            align-items: center; /* Center content vertically within grid rows */
+            justify-content: center; /* Center content horizontally */
+            overflow: hidden; /* Crucial: Hide scrollbars */
         }
 
-        .menu-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* Main Title Section */
+        .main-title-container {
             width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            /* Removed transform for simpler fade transition */
-            transition: opacity 1s ease-in-out; /* Smooth fade transition only */
-            padding: 2rem;
-            box-sizing: border-box;
+            text-align: center;
+            padding: 0.4vh 0; /* Further reduced vertical padding */
         }
 
-        .menu-slide.active {
-            opacity: 1;
-            /* Removed transform for simpler fade transition */
+        .main-title {
+            font-size: 4vmin; /* Further reduced font size */
+            font-weight: bold;
+            color: #ffcc00;
+            text-shadow: 0.2vmin 0.2vmin 0.4vmin rgba(0, 0, 0, 0.7);
+            letter-spacing: 0.07vmin; /* Slightly tighter letter spacing */
+            line-height: 1;
+        }
+
+        /* Main Content Grid: Menu Categories above, Order/Creative below */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column for main content */
+            grid-template-rows: 1fr auto; /* Menu categories take most space, bottom sections auto-height */
+            gap: 0.3vmin; /* FURTHER REDUCED GAP between menu categories and bottom sections for tighter fit */
+            width: 98%; /* Adjusted for better fit */
+            height: 100%; /* Take full available height */
+            box-sizing: border-box;
+            padding: 0.4vmin; /* Further reduced padding inside the content grid */
+        }
+
+        /* Container for the 4 category sections (now a 2x2 grid) */
+        .menu-categories-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns for categories */
+            grid-template-rows: repeat(2, 1fr); /* 2 rows for categories */
+            gap: 1.8vmin; /* Slightly reduced gap between category sections for better vertical fit */
+            height: 100%; /* Fill available height */
+            width: 100%;
+        }
+
+        .category-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align content to the top within its grid cell */
+            padding: 0.7vmin; /* Adjusted padding inside category section */
+            box-sizing: border-box;
+            min-height: 0; /* Allow flex items to shrink */
         }
 
         .category-title {
-            font-size: 4.5rem; /* Large category title */
+            font-size: 3.2vmin; /* Adjusted font size */
             font-weight: bold;
-            margin-bottom: 2.5rem;
-            color: #ffcc00; /* Gold/yellow for titles */
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-            text-align: center;
-            letter-spacing: 0.1em; /* Slightly spaced letters */
+            color: #ff0066;
+            text-shadow: 0.2vmin 0.2vmin 0.4vmin rgba(0, 0, 0, 0.5);
+            border-bottom: 0.2vmin solid #ffcc00; /* Slightly thinner border */
+            padding-bottom: 0.25vmin;
+            margin-bottom: 0.8vmin; /* Reduced margin */
+            line-height: 1.1;
+            white-space: nowrap; /* Prevent title from wrapping */
+        }
+
+        .items-container {
+            display: flex;
+            flex-direction: column; /* Stack items vertically within a category */
+            gap: 1.2vmin; /* Slightly reduced gap between item cards */
+            width: 100%;
+            flex-grow: 1; /* Allow items container to take available space */
+            justify-content: flex-start; /* Align items to top */
+            align-items: center;
         }
 
         .item-card {
-            background-color: rgba(51, 0, 51, 0.9); /* Slightly transparent purple for cards */
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            margin: 1rem;
-            width: 90%;
-            max-width: 700px; /* Wider cards for more content */
+            background-color: rgba(51, 0, 51, 0.9);
+            border-radius: 1.2vmin; /* Adjusted radius */
+            padding: 1.2vmin; /* Adjusted padding */
+            box-shadow: 0 0.8vmin 1.6vmin rgba(0, 0, 0, 0.5);
+            border: 0.2vmin solid #00ff99; /* Slightly thicker border */
             display: flex;
-            flex-direction: row;
+            flex-direction: row; /* Image and text side-by-side */
             align-items: center;
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
-            border: 3px solid #ff0066; /* Thicker pink border */
-            opacity: 0; /* Hidden by default for item animation */
-            /* Removed transform and transition-delay for simpler item appearance */
-            transition: opacity 0.7s ease-out; /* Simple fade for items */
-            position: relative; /* For LTO tag positioning */
-        }
-
-        /* Animation for items when their slide becomes active */
-        .menu-slide.active .item-card {
-            opacity: 1;
-            /* Items just fade in, no slide-up */
+            text-align: left; /* Align text to left within card */
+            position: relative;
+            width: 98%; /* Take almost full width of its container */
+            min-height: 0; /* Allow card to shrink */
         }
 
         .item-image {
-            width: 180px; /* Larger image width */
-            height: 180px; /* Larger image height */
-            border-radius: 1rem;
+            width: 9.5vmin; /* Slightly reduced image size */
+            height: 9.5vmin; /* Slightly reduced image size */
+            border-radius: 0.7vmin;
             object-fit: cover;
-            margin-right: 1.8rem;
-            border: 3px solid #ffcc00; /* Thicker gold border for images */
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            margin-right: 1vmin; /* Spacing from text */
+            border: 0.15vmin solid #ffcc00; /* Thinner border */
+            box-shadow: 0 0.3vmin 0.6vmin rgba(0, 0, 0, 0.3);
+            flex-shrink: 0; /* Prevent image from shrinking */
         }
 
         .item-details {
@@ -103,45 +124,46 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            min-width: 0; /* Allow text to shrink */
         }
 
         .item-name {
-            font-size: 2.8rem; /* Larger item name */
+            font-size: 2.2vmin; /* Adjusted font size */
             font-weight: bold;
-            color: #ffee00; /* Bright yellow for item names */
-            margin-bottom: 0.6rem;
+            color: #ffee00;
+            margin-bottom: 0.15vmin;
             line-height: 1.1;
+            white-space: nowrap; /* Prevent name from wrapping */
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .item-info {
-            font-size: 1.35rem; /* Larger info text */
-            line-height: 1.5;
-            color: #e0e0e0; /* Off-white for details */
-        }
-
-        .item-price {
-            font-size: 2.5rem; /* More prominent price */
-            font-weight: bold;
-            color: #00ff99; /* Green for prices */
-            text-align: right;
-            margin-top: 0.8rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+            font-size: 1.3vmin; /* Adjusted font size */
+            line-height: 1.3; /* Adjusted line height for readability */
+            color: #e0e0e0;
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Keep at 3 lines to prevent cutoff */
+            -webkit-box-orient: vertical;
         }
 
         .lto-tag {
             position: absolute;
-            top: -15px; /* Position above the card */
-            right: -15px; /* Position to the right of the card */
-            background-color: #ff4500; /* Orange-red for LTO */
+            top: -0.8vmin; /* Adjusted position */
+            right: -0.8vmin; /* Adjusted position */
+            background-color: #ff4500;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px; /* Pill shape */
-            font-size: 1.2rem;
+            padding: 0.3vmin 0.6vmin; /* Adjusted padding */
+            border-radius: 9999px;
+            font-size: 0.9vmin; /* Adjusted font size */
             font-weight: bold;
             text-transform: uppercase;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            animation: pulse 1.5s infinite; /* Blinking/pulsing animation */
-            transform: rotate(10deg); /* Slightly rotate for flair */
+            box-shadow: 0 0.3vmin 0.6vmin rgba(0, 0, 0, 0.3);
+            animation: pulse 1.5s infinite;
+            transform: rotate(10deg);
         }
 
         @keyframes pulse {
@@ -150,368 +172,257 @@
             100% { transform: scale(1) rotate(10deg); opacity: 1; }
         }
 
-        /* Final "Order Now" slide specific styles */
-        #order-now-slide {
-            background-color: rgba(0, 0, 0, 0.7); /* Darker background for focus */
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* Container for Order and Creative boxes (now below menu categories) */
+        .bottom-section-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns for order and creative boxes */
+            gap: 1.5vmin; /* Slightly reduced gap between the two boxes */
+            width: 100%; /* Span full width */
+            box-sizing: border-box;
+            padding: 0.8vmin; /* Adjusted padding around the bottom sections */
+            min-height: 0;
+        }
+
+        /* Order Now Section */
+        .order-section {
+            background: radial-gradient(circle at center, rgba(51, 0, 51, 0.95), rgba(0, 0, 0, 0.9)); /* Stronger radial gradient */
+            padding: 1vmin; /* Adjusted padding */
+            border-radius: 1vmin; /* Adjusted border radius */
+            height: 100%; /* Fill available height in its grid cell */
             text-align: center;
+            box-shadow: 0 0.7vmin 1.4vmin rgba(0, 0, 0, 0.7); /* Stronger shadow */
+            border: 0.18vmin solid #ffcc00; /* Thicker border */
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+            align-items: center;
+            justify-content: center; /* Center content vertically within its column */
+            box-sizing: border-box;
+            min-height: 0;
         }
 
-        #order-now-slide .order-title {
-            font-size: 5rem;
+        .order-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7vmin; /* Space between icon and text */
+            margin-bottom: 0.7vmin; /* Reduced margin */
+            width: 100%;
+        }
+
+        .order-title {
+            font-size: 2.8vmin; /* Reduced font size */
             color: #00ff99;
-            margin-bottom: 2rem;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+            text-shadow: 0.15vmin 0.15vmin 0.3vmin rgba(0, 0, 0, 0.6);
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.4vmin;
+        }
+        .order-title svg {
+            height: 2.8vmin; /* Size the SVG icon to match title font size */
+            width: 2.8vmin;
+            fill: #00ff99; /* Match text color */
         }
 
-        #order-now-slide .order-text {
-            font-size: 2rem;
-            color: #ffcc00;
-            margin-bottom: 3rem;
-            max-width: 80%;
+        .order-text {
+            font-size: 1.2vmin; /* Reduced font size */
+            color: #e0e0e0;
+            margin-bottom: 1vmin; /* Adjusted margin */
         }
 
-        #order-now-slide .qr-code-placeholder {
-            width: 300px;
-            height: 300px;
+        .qr-code-placeholder {
+            width: 12vmin; /* Reduced QR code placeholder size */
+            height: 12vmin; /* Reduced QR code placeholder size */
             background-color: #ffffff;
-            border-radius: 1rem;
+            border-radius: 0.7vmin; /* Reduced border radius */
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
+            font-size: 0.8vmin; /* Reduced font size */
             color: #333;
             font-weight: bold;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-            border: 5px solid #ff0066;
+            box-shadow: 0 0.3vmin 0.6vmin rgba(0, 0, 0, 0.4);
+            border: 0.12vmin solid #ff0066; /* Thinner border */
+            flex-shrink: 0;
+        }
+
+        /* New Creative Box */
+        .creative-box {
+            background: radial-gradient(circle at center, rgba(0, 51, 51, 0.95), rgba(0, 0, 0, 0.9)); /* Different gradient color */
+            padding: 1vmin; /* Adjusted padding */
+            border-radius: 1vmin; /* Adjusted border radius */
+            height: 100%; /* Fill available height in its grid cell */
+            text-align: center;
+            box-shadow: 0 0.7vmin 1.4vmin rgba(0, 0, 0, 0.7);
+            border: 0.18vmin solid #00ff99; /* Different border color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Vertically center content */
+            box-sizing: border-box;
+            min-height: 0;
+        }
+        .creative-box-title {
+            font-size: 2.8vmin; /* Reduced font size */
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 0.7vmin;
+            text-shadow: 0.15vmin 0.15vmin 0.3vmin rgba(0, 0, 0, 0.6);
+            line-height: 1.1;
+        }
+        .creative-box-text {
+            font-size: 1.5vmin; /* Reduced font size */
+            color: #e0e0e0;
+            line-height: 1.3;
         }
 
 
-        /* Responsive adjustments for smaller screens (e.g., if viewed on a tablet) */
-        @media (max-width: 1024px) {
-            .category-title {
-                font-size: 3.5rem;
-                margin-bottom: 2rem;
-            }
-            .item-card {
-                max-width: 600px;
-                padding: 1.2rem;
-            }
-            .item-image {
-                width: 140px;
-                height: 140px;
-                margin-right: 1.5rem;
-            }
-            .item-name {
-                font-size: 2.2rem;
-            }
-            .item-info {
-                font-size: 1.1rem;
-            }
-            .item-price {
-                font-size: 2rem;
-            }
-            .lto-tag {
-                font-size: 1rem;
-                padding: 0.4rem 0.8rem;
-                top: -10px;
-                right: -10px;
-            }
-            #order-now-slide .order-title {
-                font-size: 4rem;
-            }
-            #order-now-slide .order-text {
-                font-size: 1.5rem;
-            }
-            #order-now-slide .qr-code-placeholder {
-                width: 250px;
-                height: 250px;
-            }
-        }
-
+        /* Media queries for very specific aspect ratios if needed, but VMIN should handle most */
         @media (max-width: 768px) {
-            .category-title {
-                font-size: 2.8rem;
-                margin-bottom: 1.5rem;
+            .content-grid {
+                grid-template-columns: 1fr; /* Stack main content vertically */
+                grid-template-rows: auto auto;
+            }
+            .menu-categories-container {
+                grid-template-columns: repeat(2, 1fr); /* Revert to 2x2 for categories on smaller screens */
+                grid-template-rows: repeat(2, 1fr);
+                gap: 2vmin;
+            }
+            .bottom-section-container {
+                grid-template-columns: 1fr; /* Stack order and creative boxes vertically */
+                margin-top: 2.5vmin; /* Add margin when stacked */
             }
             .item-card {
-                flex-direction: column; /* Stack items vertically on small screens */
+                flex-direction: column; /* Stack image and text vertically in cards on very narrow screens */
                 text-align: center;
-                width: 95%;
-                padding: 1rem;
-                margin: 0.8rem;
+                align-items: center;
             }
             .item-image {
                 margin-right: 0;
-                margin-bottom: 1rem;
-                width: 120px;
-                height: 120px;
-            }
-            .item-name {
-                font-size: 1.8rem;
-            }
-            .item-info {
-                font-size: 0.9rem;
-            }
-            .item-price {
-                font-size: 1.5rem;
-                text-align: center;
-            }
-            .lto-tag {
-                font-size: 0.9rem;
-                padding: 0.3rem 0.6rem;
-                top: -5px;
-                right: -5px;
-            }
-            #order-now-slide .order-title {
-                font-size: 3rem;
-            }
-            #order-now-slide .order-text {
-                font-size: 1.2rem;
-            }
-            #order-now-slide .qr-code-placeholder {
-                width: 200px;
-                height: 200px;
-                font-size: 1.2rem;
+                margin-bottom: 0.8vmin;
             }
         }
     </style>
 </head>
 <body>
-    <div id="menu-container" class="menu-container">
-        <!-- Slides will be dynamically inserted here by JavaScript -->
+    <div class="main-title-container">
+        <h1 class="main-title">Taco Bell Menu</h1>
     </div>
 
-    <script>
-        // Array containing all menu data
-        const menuData = [
-            {
-                category: "Signature Meals",
-                items: [
-                    {
-                        name: "Crunchwrap Supreme (Parody)",
-                        ingredients: "Seasoned 'Mystery Meat', Nacho Cheese Sauce, Crispy Tostada, Sour Cream, Lettuce, Tomato, Flour Tortilla.",
-                        calories: "530 Cal",
-                        price: "$4.99",
-                        image: "https://placehold.co/300x300/ff0066/ffffff?text=Crunchwrap"
-                    },
-                    {
-                        name: "Cheesy Gordita Crunch (Parody)",
-                        ingredients: "Seasoned 'Mystery Meat', Spicy Ranch Sauce, Lettuce, Cheddar Cheese, Crispy Taco Shell, Soft Flatbread, Melted Three-Cheese Blend.",
-                        calories: "480 Cal",
-                        price: "$4.49",
-                        image: "https://placehold.co/300x300/00ff99/ffffff?text=Gordita"
-                    }
-                ]
-            },
-            {
-                category: "Burritos",
-                items: [
-                    {
-                        name: "Bean & Cheese Burrito (Parody)",
-                        ingredients: "Refried Beans, Cheddar Cheese, Red Sauce, Warm Flour Tortilla.",
-                        calories: "380 Cal",
-                        price: "$2.29",
-                        image: "https://placehold.co/300x300/ffcc00/000000?text=Bean+Burrito"
-                    },
-                    {
-                        name: "Beefy 5-Layer Burrito (Parody)",
-                        ingredients: "Seasoned 'Mystery Meat', Nacho Cheese Sauce, Refried Beans, Sour Cream, Shredded Cheddar Cheese, Flour Tortilla.",
-                        calories: "490 Cal",
-                        price: "$3.79",
-                        image: "https://placehold.co/300x300/ff0066/ffffff?text=5-Layer"
-                    }
-                ]
-            },
-            {
-                category: "Tacos",
-                items: [
-                    {
-                        name: "Crunchy Taco (Parody)",
-                        ingredients: "Seasoned 'Mystery Meat', Lettuce, Shredded Cheddar Cheese, Crispy Taco Shell.",
-                        calories: "170 Cal",
-                        price: "$1.89",
-                        image: "https://placehold.co/300x300/00ff99/ffffff?text=Crunchy+Taco"
-                    },
-                    {
-                        name: "Soft Taco (Parody)",
-                        ingredients: "Seasoned 'Mystery Meat', Lettuce, Shredded Cheddar Cheese, Warm Flour Tortilla.",
-                        calories: "180 Cal",
-                        price: "$1.89",
-                        image: "https://placehold.co/300x300/ffcc00/000000?text=Soft+Taco"
-                    }
-                ]
-            },
-            {
-                category: "Specialty Items",
-                items: [
-                    {
-                        name: "Cinnamon Twists (Parody)",
-                        ingredients: "Crispy Twisted Pastries, Cinnamon Sugar.",
-                        calories: "170 Cal",
-                        price: "$1.29",
-                        image: "https://placehold.co/300x300/ff0066/ffffff?text=Cinnamon"
-                    },
-                    {
-                        name: "Cheesy Fiesta Potatoes (Parody)",
-                        ingredients: "Crispy Potato Bites, Nacho Cheese Sauce, Sour Cream.",
-                        calories: "220 Cal",
-                        price: "$2.79",
-                        image: "https://placehold.co/300x300/00ff99/ffffff?text=Potatoes"
-                    }
-                ]
-            }
-        ];
+    <div class="content-grid">
+        <!-- Main menu categories container -->
+        <div class="menu-categories-container">
+            <!-- Signature Meals -->
+            <div class="category-section">
+                <h2 class="category-title">Signature Meals</h2>
+                <div class="items-container">
+                    <div class="item-card">
+                        <img class="item-image" src="Images/Crunchwrap2.png" alt="Crunchwrap Supreme" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <div class="item-details">
+                            <h3 class="item-name">Crunchwrap Supreme</h3>
+                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Nacho Cheese Sauce, Crispy Tostada, Sour Cream, Lettuce, Tomato, Flour Tortilla.<br><strong>Calories:</strong> 530 Cal</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img class="item-image" src="Images/Cheesy.png" alt="Cheesy Gordita Crunch" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <div class="item-details">
+                            <h3 class="item-name">Cheesy Gordita Crunch</h3>
+                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Spicy Ranch Sauce, Lettuce, Cheddar Cheese, Crispy Taco Shell, Soft Flatbread, Melted Three-Cheese Blend.<br><strong>Calories:</strong> 480 Cal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        // Add a final "Order Now" slide
-        const orderNowSlideData = {
-            category: "Order Now!",
-            isCallToAction: true // Custom flag for this special slide
-        };
+            <!-- Burritos -->
+            <div class="category-section">
+                <h2 class="category-title">Burritos</h2>
+                <div class="items-container">
+                    <div class="item-card">
+                        <img class="item-image" src="Images/CatinaBur.png" alt="Cantina Chicken Burrito" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <div class="item-details">
+                            <h3 class="item-name">Cantina Chicken Burrito</h3>
+                            <p class="item-info"><strong>Ingredients:</strong> Refried Beans, Cheddar Cheese, Red Sauce, Warm Flour Tortilla.<br><strong>Calories:</strong> 380 Cal</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img class="item-image" src="Images/BeanBurrito.png" alt="Bean Burrito" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <div class="item-details">
+                            <h3 class="item-name">Bean Burrito</h3>
+                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Nacho Cheese Sauce, Refried Beans, Sour Cream, Shredded Cheddar Cheese, Flour Tortilla.<br><strong>Calories:</strong> 490 Cal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        const allSlidesData = [...menuData, orderNowSlideData]; // Combine all slide data
+            <!-- Tacos -->
+            <div class="category-section">
+                <h2 class="category-title">Tacos</h2>
+                <div class="items-container">
+                    <div class="item-card">
+                        <img class="item-image" src="Images/CatinaTaco.png" alt="Crunchy Taco (Parody)" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <div class="item-details">
+                            <h3 class="item-name">Cantina Chicken Taco</h3>
+                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Lettuce, Shredded Cheddar Cheese, Crispy Taco Shell.<br><strong>Calories:</strong> 170 Cal</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img class="item-image" src="Images/softTaco.png" alt="Soft Taco (Parody)" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <div class="item-details">
+                            <h3 class="item-name">Soft Taco</h3>
+                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Lettuce, Shredded Cheddar Cheese, Warm Flour Tortilla.<br><strong>Calories:</strong> 180 Cal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        let currentSlideIndex = 0;
-        const slideDuration = 8000; // 8 seconds per slide
-        let intervalId; // To store the interval ID for clearing
+            <!-- Specialty Items -->
+            <div class="category-section">
+                <h2 class="category-title">Specialty Items</h2>
+                <div class="items-container">
+                    <div class="item-card">
+                        <img class="item-image" src="Images/quesadilla.png" alt="Cinnamon Twists (Parody)" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <div class="item-details">
+                            <h3 class="item-name">Chicken Quesadilla</h3>
+                            <p class="item-info"><strong>Ingredients:</strong> Crispy Twisted Pastries, Cinnamon Sugar.<br><strong>Calories:</strong> 170 Cal</p>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img class="item-image" src="Images/mexicanPizza.png" alt="Cheesy Fiesta Potatoes (Parody)" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <div class="item-details">
+                            <h3 class="item-name">Mexican Pizza</h3>
+                            <p class="item-info"><strong>Ingredients:</strong> Crispy Potato Bites, Nacho Cheese Sauce, Sour Cream.<br><strong>Calories:</strong> 220 Cal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        // Function to create a single menu slide HTML element
-        function createMenuSlide(slideData) {
-            const slideDiv = document.createElement('div');
-            slideDiv.className = 'menu-slide';
+        <!-- Bottom Section: Order Now and Creative Box -->
+        <div class="bottom-section-container">
+            <!-- Order Now Section -->
+            <div class="order-section">
+                <div class="order-title-container">
+                    <h2 class="order-title">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zM16 8h-2V6h-2v2h-2v2h2v2h2v-2h2V8z"/>
+                        </svg>
+                        Ready to Order?
+                    </h2>
+                </div>
+                <p class="order-text">Scan the QR code below to access our parody ordering app!</p>
+                <div class="qr-code-placeholder">
+                    <img class="qr-code-image" src="Images/qrCode.png" alt="QR Code to Order" onerror="this.src='https://placehold.co/120x120/808080/FFFFFF?text=QR+Error';">
+                </div>
+            </div>
 
-            if (slideData.isCallToAction) {
-                slideDiv.id = 'order-now-slide'; // Apply specific styles for this slide
-
-                const orderTitle = document.createElement('h1');
-                orderTitle.className = 'order-title';
-                orderTitle.textContent = "Ready to Order?";
-                slideDiv.appendChild(orderTitle);
-
-                const orderText = document.createElement('p');
-                orderText.className = 'order-text';
-                orderText.textContent = "Scan the QR code below to access our parody ordering app!";
-                slideDiv.appendChild(orderText);
-
-                const qrCodePlaceholder = document.createElement('div');
-                qrCodePlaceholder.className = 'qr-code-placeholder';
-                qrCodePlaceholder.innerHTML = 'YOUR QR CODE HERE<br>(e.g., link to your app)';
-                // In a real app, you'd generate a QR code image here.
-                // For a party, you can print a QR code and tape it over the TV or generate one dynamically if you have a QR code library.
-                slideDiv.appendChild(qrCodePlaceholder);
-
-            } else {
-                const categoryTitle = document.createElement('h1');
-                categoryTitle.className = 'category-title';
-                categoryTitle.textContent = slideData.category;
-                slideDiv.appendChild(categoryTitle);
-
-                // Randomly select one item to be an LTO
-                const ltoItemIndex = Math.floor(Math.random() * slideData.items.length);
-
-                slideData.items.forEach((item, index) => {
-                    const itemCard = document.createElement('div');
-                    itemCard.className = 'item-card';
-
-                    const itemImage = document.createElement('img');
-                    itemImage.className = 'item-image';
-                    itemImage.src = item.image;
-                    itemImage.alt = item.name;
-                    // Add onerror to display a placeholder if image fails to load
-                    itemImage.onerror = function() {
-                        this.src = `https://placehold.co/180x180/808080/ffffff?text=Image+Error`;
-                    };
-                    itemCard.appendChild(itemImage);
-
-                    const itemDetails = document.createElement('div');
-                    itemDetails.className = 'item-details';
-
-                    const itemName = document.createElement('h2');
-                    itemName.className = 'item-name';
-                    itemName.textContent = item.name;
-                    itemDetails.appendChild(itemName);
-
-                    const itemInfo = document.createElement('p');
-                    itemInfo.className = 'item-info';
-                    itemInfo.innerHTML = `<strong>Ingredients:</strong> ${item.ingredients}<br><strong>Calories:</strong> ${item.calories}`;
-                    itemDetails.appendChild(itemInfo);
-
-                    const itemPrice = document.createElement('p');
-                    itemPrice.className = 'item-price';
-                    itemPrice.textContent = item.price;
-                    itemDetails.appendChild(itemPrice);
-
-                    itemCard.appendChild(itemDetails);
-
-                    // Add LTO tag if this item is selected
-                    if (index === ltoItemIndex) {
-                        const ltoTag = document.createElement('span');
-                        ltoTag.className = 'lto-tag';
-                        ltoTag.textContent = 'LTO!'; // Limited Time Offer
-                        itemCard.appendChild(ltoTag);
-                    }
-
-                    slideDiv.appendChild(itemCard);
-                });
-            }
-
-            return slideDiv;
-        }
-
-        // Function to display a specific slide
-        function showSlide(index) {
-            const slides = document.querySelectorAll('.menu-slide');
-
-            // Reset all slides for smooth transition
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-                // Reset item card opacities for next cycle
-                slide.querySelectorAll('.item-card').forEach(card => {
-                    card.style.opacity = '0';
-                });
-            });
-
-            // Activate the current slide
-            const activeSlide = slides[index];
-            if (activeSlide) {
-                activeSlide.classList.add('active');
-                // Ensure its item cards are visible
-                activeSlide.querySelectorAll('.item-card').forEach(card => {
-                    card.style.opacity = '1';
-                });
-            }
-        }
-
-        // Function to advance to the next slide
-        function nextSlide() {
-            currentSlideIndex = (currentSlideIndex + 1) % allSlidesData.length;
-            showSlide(currentSlideIndex);
-        }
-
-        // Initialize the menu board when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuContainer = document.getElementById('menu-container');
-
-            // Create and append all slides
-            allSlidesData.forEach(slideData => {
-                const slide = createMenuSlide(slideData);
-                menuContainer.appendChild(slide);
-            });
-
-            // Ensure the very first slide is immediately visible upon load
-            const initialSlide = document.querySelectorAll('.menu-slide')[currentSlideIndex];
-            if (initialSlide) {
-                initialSlide.classList.add('active');
-                initialSlide.querySelectorAll('.item-card').forEach(card => {
-                    card.style.opacity = '1';
-                });
-            }
-
-            // Start the automatic slideshow loop AFTER the initial slide is displayed
-            intervalId = setInterval(nextSlide, slideDuration);
-        });
-    </script>
+            <!-- New Creative Box: Party Hashtag -->
+            <div class="creative-box">
+                <h2 class="creative-box-title">Share Your Feast!</h2>
+                <p class="creative-box-text">Tag us on social media:</p>
+                <p class="creative-box-text font-bold text-yellow-300 text-2xl">#TacoBellNight@Home</p>
+                <p class="creative-box-text">Don't forget to leave a comment on Yelp!</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

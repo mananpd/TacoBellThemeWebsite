@@ -193,7 +193,7 @@
             box-shadow: 0 0.7vmin 1.4vmin rgba(0, 0, 0, 0.7); /* Stronger shadow */
             border: 0.18vmin solid #ffcc00; /* Thicker border */
             display: flex;
-            flex-direction: column; /* Stack content vertically */
+            flex-direction: column;
             align-items: center;
             justify-content: center; /* Center content vertically within its column */
             box-sizing: border-box;
@@ -230,21 +230,26 @@
             margin-bottom: 1vmin; /* Adjusted margin */
         }
 
+        /* QR Code Placeholder - Removed white box styling */
         .qr-code-placeholder {
             width: 12vmin; /* Reduced QR code placeholder size */
             height: 12vmin; /* Reduced QR code placeholder size */
-            background-color: #ffffff;
-            border-radius: 0.7vmin; /* Reduced border radius */
-            display: flex;
+            /* Removed background-color, border-radius, border, box-shadow, font-size, color, font-weight */
+            display: flex; /* Keep flex for centering the image */
             justify-content: center;
             align-items: center;
-            font-size: 0.8vmin; /* Reduced font size */
-            color: #333;
-            font-weight: bold;
-            box-shadow: 0 0.3vmin 0.6vmin rgba(0, 0, 0, 0.4);
-            border: 0.12vmin solid #ff0066; /* Thinner border */
             flex-shrink: 0;
         }
+
+        /* Styling for the QR code image itself */
+        .qr-code-placeholder img {
+            width: 100%; /* Make image fill the placeholder div */
+            height: 100%; /* Make image fill the placeholder div */
+            object-fit: contain; /* Ensure the whole image is visible */
+            border-radius: 0.5vmin; /* Slightly rounded corners for the image itself */
+            box-shadow: 0 0.3vmin 0.6vmin rgba(0, 0, 0, 0.4); /* Optional: add a subtle shadow to the image */
+        }
+
 
         /* New Creative Box */
         .creative-box {
@@ -320,14 +325,14 @@
                         <img class="item-image" src="Images/Crunchwrap2.png" alt="Crunchwrap Supreme" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
                         <div class="item-details">
                             <h3 class="item-name">Crunchwrap Supreme</h3>
-                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Nacho Cheese Sauce, Crispy Tostada, Sour Cream, Lettuce, Tomato, Flour Tortilla.<br><strong>Calories:</strong> 530 Cal</p>
+                            <p class="item-info"><strong>Ingredients:</strong> Seasoned Beef, Cheese, Crispy Tostada, Sour Cream, Lettuce, Salsa, Warm Flour Tortilla.<br><strong>Calories:</strong> 530 Cal</p>
                         </div>
                     </div>
                     <div class="item-card">
                         <img class="item-image" src="Images/Cheesy.png" alt="Cheesy Gordita Crunch" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
                         <div class="item-details">
                             <h3 class="item-name">Cheesy Gordita Crunch</h3>
-                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Spicy Ranch Sauce, Lettuce, Cheddar Cheese, Crispy Taco Shell, Soft Flatbread, Melted Three-Cheese Blend.<br><strong>Calories:</strong> 480 Cal</p>
+                            <p class="item-info"><strong>Ingredients:</strong> Seasoned Beef, Lettuce, Cheese, Crispy Taco Shell, Warm Flour Tortilla.<br><strong>Calories:</strong> 480 Cal</p>
                         </div>
                     </div>
                 </div>
@@ -341,14 +346,14 @@
                         <img class="item-image" src="Images/CatinaBur.png" alt="Cantina Chicken Burrito" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
                         <div class="item-details">
                             <h3 class="item-name">Cantina Chicken Burrito</h3>
-                            <p class="item-info"><strong>Ingredients:</strong> Refried Beans, Cheddar Cheese, Red Sauce, Warm Flour Tortilla.<br><strong>Calories:</strong> 380 Cal</p>
+                            <p class="item-info"><strong>Ingredients:</strong> Slow-Roasted Chicken, Avocado, Salsa, Lettus, Cheese, Warm Flour Tortilla.<br><strong>Calories:</strong> 580 Cal</p>
                         </div>
                     </div>
                     <div class="item-card">
                         <img class="item-image" src="Images/BeanBurrito.png" alt="Bean Burrito" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
                         <div class="item-details">
                             <h3 class="item-name">Bean Burrito</h3>
-                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Nacho Cheese Sauce, Refried Beans, Sour Cream, Shredded Cheddar Cheese, Flour Tortilla.<br><strong>Calories:</strong> 490 Cal</p>
+                            <p class="item-info"><strong>Ingredients:</strong> Black Beans, Salsa, Cheese, Warm Flour Tortilla.<br><strong>Calories:</strong> 390 Cal</p>
                         </div>
                     </div>
                 </div>
@@ -359,17 +364,17 @@
                 <h2 class="category-title">Tacos</h2>
                 <div class="items-container">
                     <div class="item-card">
-                        <img class="item-image" src="Images/CatinaTaco.png" alt="Crunchy Taco (Parody)" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <img class="item-image" src="Images/CatinaTaco.png" alt="Cantina Chicken Taco" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
                         <div class="item-details">
                             <h3 class="item-name">Cantina Chicken Taco</h3>
-                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Lettuce, Shredded Cheddar Cheese, Crispy Taco Shell.<br><strong>Calories:</strong> 170 Cal</p>
+                            <p class="item-info"><strong>Ingredients:</strong> Slow-Roasted Chicken, Avocado, Salsa, Lettuce, Cheese, Soft Flour Tortilla.<br><strong>Calories:</strong> 370 Cal</p>
                         </div>
                     </div>
                     <div class="item-card">
-                        <img class="item-image" src="Images/softTaco.png" alt="Soft Taco (Parody)" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <img class="item-image" src="Images/softTaco.png" alt="Soft Taco" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
                         <div class="item-details">
                             <h3 class="item-name">Soft Taco</h3>
-                            <p class="item-info"><strong>Ingredients:</strong> Seasoned 'Mystery Meat', Lettuce, Shredded Cheddar Cheese, Warm Flour Tortilla.<br><strong>Calories:</strong> 180 Cal</p>
+                            <p class="item-info"><strong>Ingredients:</strong> Seasoned Beef, Lettuce, Salsa, Cheese, Warm Flour Tortilla.<br><strong>Calories:</strong> 280 Cal</p>
                         </div>
                     </div>
                 </div>
@@ -380,17 +385,17 @@
                 <h2 class="category-title">Specialty Items</h2>
                 <div class="items-container">
                     <div class="item-card">
-                        <img class="item-image" src="Images/quesadilla.png" alt="Cinnamon Twists (Parody)" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <img class="item-image" src="Images/quesadilla.png" alt="Chicken Quesadilla" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
                         <div class="item-details">
                             <h3 class="item-name">Chicken Quesadilla</h3>
-                            <p class="item-info"><strong>Ingredients:</strong> Crispy Twisted Pastries, Cinnamon Sugar.<br><strong>Calories:</strong> 170 Cal</p>
+                            <p class="item-info"><strong>Ingredients:</strong> Grilled Chicken, Cheese, Warm Flour Tortilla.<br><strong>Calories:</strong> 570 Cal</p>
                         </div>
                     </div>
                     <div class="item-card">
-                        <img class="item-image" src="Images/mexicanPizza.png" alt="Cheesy Fiesta Potatoes (Parody)" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
+                        <img class="item-image" src="Images/mexicanPizza.png" alt="Mexican Pizza" onerror="this.src='https://placehold.co/95x95/808080/ffffff?text=Image+Error';">
                         <div class="item-details">
                             <h3 class="item-name">Mexican Pizza</h3>
-                            <p class="item-info"><strong>Ingredients:</strong> Crispy Potato Bites, Nacho Cheese Sauce, Sour Cream.<br><strong>Calories:</strong> 220 Cal</p>
+                            <p class="item-info"><strong>Ingredients:</strong> Seasoned Beef, Black Beans, Two Crispy Tostada Shells, Cheese, Salsa.<br><strong>Calories:</strong> 520 Cal</p>
                         </div>
                     </div>
                 </div>
@@ -426,3 +431,4 @@
     </div>
 </body>
 </html>
+
